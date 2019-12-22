@@ -1,0 +1,38 @@
+#app {
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  padding-top: 100px;
+  display: flex;
+  justify-content: space-around;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #f0f2f5;
+}
+
+div.card {
+  background-color: white;
+  padding: 20px 0;
+}
+
+div.profile {
+  width: 300px;
+  height: 350px;
+}
+
+div.profile img {
+  max-width: 60%;
+}
+
+div.tasklist {
+  width: 500px;
+}
+
+@media (max-width: 900px) {
+  #app {
+    flex-direction: column;
+    align-items: center;
+  }
+  div.card {
+    box-shadow: none;
+    width: 90%;
+  }
+}
