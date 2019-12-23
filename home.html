@@ -18,10 +18,15 @@
     <img class="logo" src="./img/yzzx/logo.png">
     <div class="profile card ccol">
       <img src="./img/person.svg">
-      <h1>这是姓名</h1>
+      <h1>{{name}}</h1>
+      <hr>
+      <h3>{{sn}}</h3>
     </div>
     <div class="tasklist card ccol">
-      &nbsp;
+      <h1>事务列表</h1>
+      <div v-for="task in tasklist" class="task round">
+        <h3>{{task.title}}</h3>
+      </div>
     </div>
   </div>
   <script src="./js/common.js"></script>

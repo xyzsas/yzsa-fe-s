@@ -8,10 +8,15 @@ const app = new Vue({
   el: '#app',
   data: {
     step: 'username',
-    loading: false,
+    loading: true,
     username: '',
     password: '',
     random: ''
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 500);
   },
   methods: {
     next: async function() {
@@ -42,7 +47,10 @@ const app = new Vue({
           password: HASH(HASH(this.password, SALT), this.random)
         })
         .then(resp => {
-          console.log(resp);
+          let LS = window.localStorage;
+          LS["name"] = resp.data.name;
+          LS["sn"] = resp.data.sn;
+          window.location.href = "./home.html";
         })
         .catch(err => {
           CatchError(err);

@@ -13,9 +13,22 @@ div.card {
   padding: 20px 0;
 }
 
+div.card hr {
+  border: 2px solid rgba(0, 0, 0, 0.65);
+  width: 80%;
+}
+
 div.profile {
   width: 300px;
-  height: 350px;
+  height: 300px;
+}
+
+div.profile h1 {
+  margin: 10px 0 0 0;
+}
+
+div.profile h3 {
+  margin: 0;
 }
 
 div.profile img {
@@ -24,15 +37,31 @@ div.profile img {
 
 div.tasklist {
   width: 500px;
+  justify-content: flex-start;
+}
+
+div.task {
+  width: 80%;
+  margin: 10px;
+  background-color: #f0f2f5;
+  padding: 0 20px;
+  transition: all .5s ease;
 }
 
 @media (max-width: 900px) {
   #app {
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
   }
   div.card {
     box-shadow: none;
     width: 90%;
+  }
+}
+
+@media (min-width: 900px) {
+  div.task:hover {
+    box-shadow: 5px 5px 5px #ddd;
   }
 }
