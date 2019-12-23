@@ -15,7 +15,6 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   function(response) {
-    console.log(response.headers);
     window.sessionStorage["studentToken"] = response.headers["token"];
     return response;
   },
@@ -34,7 +33,17 @@ function CatchError(err) {
     if (err.response.status == 425) title = "安全风险";
     error = err.response.data;
   } 
-  swal(title, error, "error");
+  swal(title, error, "error")
+    .then(() => {
+      if (window.sessionStorage["studentToken"] = 'undefined') {
+        console.log("goback");
+        if (window.location.pathname.indexOf("task") != -1) {
+          window.location.href = "../../index.html";
+        } else if (window.location.pathname.indexOf("index.html") == -1) {
+          window.location.href = "./index.html";
+        }
+      }    
+    });
 }
 
 function HASH(msg, salt) {
@@ -45,4 +54,10 @@ function HASH(msg, salt) {
 
 function Sleep(ms){
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function QueryString(name) {
+  var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+  if (result == null || result.length < 1) return "";
+  return result[1];
 }

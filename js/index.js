@@ -45,9 +45,10 @@ const app = new Vue({
           password: HASH(HASH(this.password, SALT), this.random)
         })
         .then(resp => {
-          let LS = window.localStorage;
-          LS["name"] = resp.data.name;
-          LS["sn"] = resp.data.sn;
+          let SS = window.sessionStorage;
+          SS["name"] = resp.data.name;
+          SS["sn"] = resp.data.sn;
+          SS["studentId"] = resp.data.id;
           window.location.href = "./home.html";
         })
         .catch(err => {
