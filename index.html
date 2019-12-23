@@ -7,39 +7,23 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>学生事务系统</title>
   <link rel="stylesheet" href="./css/common.css">
-  <link rel="stylesheet" href="./css/index.css">
   <script src="https://cdn.bootcss.com/sweetalert/2.1.2/sweetalert.min.js"></script>
   <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
   <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
   <script src="https://cdn.bootcss.com/jshashes/1.0.7/hashes.min.js"></script>
 </head>
 
-<body>
-  <div id="app" class="ccol">
-    <img class="logo" src="./img/yzzx/logo.png">
-    <transition name="fade">
-      <div class="loading ccol" v-if="loading">
-        <img src="./img/loading.svg">
-        <div class="mark">若等待时间过长，请刷新页面或更换浏览器登录（推荐使用最新版Chrome浏览器）</div>
-      </div>
-    </transition>
-    <transition name="fade" mode="out-in">
-      <div v-if="step == 'username'" class="form ccol card" key="username">
-        <h1>学生事务系统</h1>
-        <h2>登录</h2>
-        <input class="round" type="text" placeholder="用户名（证件号）" v-model="username" @keyup.enter="next">
-        <div class="round button" @click="next">下一步</div>
-        <a href="http://yzzx.tech">YZSA &copy; 2020 ITI</a>  
-      </div>
-      <div v-else class="form ccol card" key="password">
-        <h1>学生事务系统</h1>
-        <h2>输入密码</h2>
-        <input class="round" type="password" placeholder="密码" v-model="password" @keyup.enter="login">
-        <div class="round button" @click="login">登录</div>
-        <a href="http://yzzx.tech">YZSA &copy; 2020 ITI</a> 
-      </div>
-    </transition>
+<body style="margin: 0;" class="ccol">
+  <noscript>您的浏览器不支持Javascript，请更换浏览器！</noscript>
+  <div id="app">
+    <img style="width: 50px;" src="./img/loading.svg">
   </div>
-  <script src="./js/common.js"></script>
-  <script src="./js/index.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      mounted() {
+        window.location.href = "./login.html";
+      }
+    })
+  </script>
 </body>

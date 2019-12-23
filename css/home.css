@@ -3,7 +3,7 @@
   min-height: calc(100vh - 100px);
   padding-top: 100px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   color: rgba(0, 0, 0, 0.65);
   background-color: #f0f2f5;
 }
@@ -11,6 +11,7 @@
 div.card {
   background-color: white;
   padding: 20px 0;
+  margin: 0 20px;
 }
 
 div.card hr {
@@ -20,11 +21,7 @@ div.card hr {
 
 div.profile {
   width: 300px;
-  height: 300px;
-}
-
-div.profile h1 {
-  margin: 10px 0 0 0;
+  height: 400px;
 }
 
 div.profile h3 {
@@ -35,8 +32,21 @@ div.profile img {
   max-width: 60%;
 }
 
+h1 {
+  margin: 10px 0 0 0;
+}
+
+div.button {
+  width: 50%;
+  color: white;
+  font-size: 1.2rem;
+  margin: 20px;
+  text-align: center;
+  background-color: #1890ff;
+}
+
 div.tasklist {
-  width: 500px;
+  width: 50%;
   justify-content: flex-start;
 }
 
@@ -45,7 +55,7 @@ div.task {
   margin: 10px;
   background-color: #f0f2f5;
   padding: 0 20px;
-  transition: all .5s ease;
+  box-shadow: 2px 2px 2px #f0f2f5;
 }
 
 @media (max-width: 900px) {
@@ -54,14 +64,17 @@ div.task {
     align-items: center;
     justify-content: flex-start;
   }
+
   div.card {
     box-shadow: none;
     width: 90%;
+    margin: 0;
   }
 }
 
 @media (min-width: 900px) {
-  div.task:hover {
+  div.task:hover,
+  div.button:hover {
     box-shadow: 5px 5px 5px #ddd;
   }
 }

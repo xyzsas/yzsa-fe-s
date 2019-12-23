@@ -1,10 +1,6 @@
 "use strict";
 
-function sleep(ms){
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-const SALT = "Supported_by_yzITI_32496";
+const SALT = "Supported_by_ITI";
 
 const app = new Vue({
   el: '#app',
@@ -15,7 +11,7 @@ const app = new Vue({
     password: '',
     random: ''
   },
-  mounted() {
+  mounted: function() {
     setTimeout(() => {
       this.loading = false;
     }, 500);

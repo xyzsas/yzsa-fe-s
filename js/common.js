@@ -1,6 +1,6 @@
 "use strict";
 
-axios.defaults.baseURL = "http://172.17.41.243:5000/";
+axios.defaults.baseURL = "http://172.17.61.212:5000/";
 
 axios.interceptors.request.use(
   function(config) {
@@ -15,6 +15,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   function(response) {
+    console.log(response.headers);
     window.sessionStorage["studentToken"] = response.headers["token"];
     return response;
   },
@@ -40,4 +41,8 @@ function HASH(msg, salt) {
   var sha256 = new Hashes.SHA256().hex(msg + salt);
   var md5 = new Hashes.MD5().hex(sha256 + salt);
   return md5;
+}
+
+function Sleep(ms){
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
