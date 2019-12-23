@@ -1,3 +1,5 @@
+"use strict";
+
 const olors = {
   green: '#f6ffed',
   blue: '#e6f7ff',

@@ -1,3 +1,5 @@
+"use strict";
+
 axios.defaults.baseURL = "http://172.17.41.243:5000/";
 
 axios.interceptors.request.use(
