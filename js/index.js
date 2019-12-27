@@ -24,7 +24,7 @@ const app = new Vue({
       }
       this.loading = true;
       await axios
-        .get("/api/C/student/auth?id=" + this.username)
+        .get("/api/C/auth?id=" + this.username)
         .then(resp => {
           this.random = resp.data;
           this.step = "password";
@@ -39,7 +39,7 @@ const app = new Vue({
       }
       this.loading = true;
       await axios
-        .post("/api/C/student/auth", {
+        .post("/api/C/auth", {
           id: this.username,
           token: this.random,
           password: HASH(HASH(this.password, SALT), this.random)
@@ -47,8 +47,7 @@ const app = new Vue({
         .then(resp => {
           let SS = window.sessionStorage;
           SS["name"] = resp.data.name;
-          SS["sn"] = resp.data.sn;
-          SS["studentId"] = resp.data.id;
+          SS["id"] = resp.data.id;
           window.location.href = "./home.html";
         })
         .catch(err => {

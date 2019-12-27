@@ -1,11 +1,9 @@
 "use strict";
 
-axios.defaults.baseURL = "http://172.17.61.212:5000/";
-
 axios.interceptors.request.use(
   function(config) {
-    config.headers["id"] = window.sessionStorage["studentId"];
-    config.headers["token"] = window.sessionStorage["studentToken"];
+    config.headers["id"] = window.sessionStorage["id"];
+    config.headers["token"] = window.sessionStorage["token"];
     return config;
   },
   function(error) {
@@ -15,12 +13,12 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   function(response) {
-    window.sessionStorage["studentToken"] = response.headers["token"];
+    window.sessionStorage["token"] = response.headers["token"];
     return response;
   },
   function(error) {
     if (error.response) {
-      window.sessionStorage["studentToken"] = error.response.headers["token"];
+      window.sessionStorage["token"] = error.response.headers["token"];
     }
     return Promise.reject(error);
   }
@@ -35,8 +33,7 @@ function CatchError(err) {
   } 
   swal(title, error, "error")
     .then(() => {
-      if (window.sessionStorage["studentToken"] = 'undefined') {
-        console.log("goback");
+      if (window.sessionStorage["token"] = 'undefined') {
         if (window.location.pathname.indexOf("task") != -1) {
           window.location.href = "../../index.html";
         } else if (window.location.pathname.indexOf("index.html") == -1) {

@@ -9,8 +9,8 @@ const colors = {
 const app = new Vue({
   el: '#app',
   data: {
-    name: window.localStorage["name"],
-    sn: window.localStorage["sn"],
+    name: window.sessionStorage["name"],
+    id: window.sessionStorage["id"],
     timestamp: 0,
     tasklist: []
   },
@@ -19,7 +19,7 @@ const app = new Vue({
       this.timestamp = Math.floor(new Date().getTime() / 1000);
     }, 1000);
     axios
-      .get("/api/S/task")
+      .get("/api/U/task")
       .then(resp => {
         this.tasklist = resp.data;
       })
@@ -28,7 +28,7 @@ const app = new Vue({
   methods: {
     logout: function() {
       axios
-        .delete("/api/C/student/auth")
+        .delete("/api/C/auth")
         .then(resp => {
           window.location.href = "./index.html";
         })

@@ -16,6 +16,7 @@ div.card {
 
 div.card hr {
   border: 2px solid rgba(0, 0, 0, 0.65);
+  background-color: rgba(0, 0, 0, 0.65);
   width: 80%;
 }
 

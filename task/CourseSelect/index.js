@@ -12,7 +12,7 @@ const app = new Vue({
         })
     }
     axios
-      .get(`/api/S/task/CourseSelect/${this.id}/info`)
+      .get(`/api/U/task/${this.id}`)
       .then(resp => {
         console.log(resp.data);
       })
