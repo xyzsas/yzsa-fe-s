@@ -33,7 +33,7 @@ function CatchError(err) {
   } 
   swal(title, error, "error")
     .then(() => {
-      if (window.sessionStorage["token"] = 'undefined') {
+      if (window.sessionStorage["token"] == 'undefined') {
         if (window.location.pathname.indexOf("task") != -1) {
           window.location.href = "../../index.html";
         } else if (window.location.pathname.indexOf("index.html") == -1) {
