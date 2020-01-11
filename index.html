@@ -17,26 +17,17 @@
 <body>
   <div id="app" class="ccol">
     <img class="logo" src="./img/yzzx/logo.png">
-    <transition name="fade">
-      <div class="loading ccol" v-if="loading">
+    <transition name="fade" mode="out-in">
+      <div class="loading ccol" v-if="loading" key="loading">
         <img src="./img/loading.svg">
         <div class="mark">若等待时间过长，请刷新页面或更换浏览器登录（推荐使用最新版Chrome浏览器）</div>
       </div>
-    </transition>
-    <transition name="fade" mode="out-in">
-      <div v-if="step == 'username'" class="form ccol card" key="username">
+      <div v-else class="form ccol card" key="form">
         <h1>学生事务系统</h1>
-        <h2>登录</h2>
-        <input class="round" type="text" placeholder="用户名（证件号）" v-model="username" @keyup.enter="next" autofocus="autofocus">
-        <div class="round button" @click="next">下一步</div>
+        <h2>{{tips.step}}</h2>
+        <input ref="input" class="round" :type="tips.inputType" :placeholder="tips.placeholder" v-model="input" @keyup.enter="act" autofocus="autofocus">
+        <div class="round button" @click="act">{{tips.button}}</div>
         <a href="http://yzzx.tech">YZSA &copy; 2020 ITI</a>  
-      </div>
-      <div v-else class="form ccol card" key="password">
-        <h1>学生事务系统</h1>
-        <h2>输入密码</h2>
-        <input class="round" type="password" placeholder="密码" v-model="password" @keyup.enter="login" autofocus="autofocus">
-        <div class="round button" @click="login">登录</div>
-        <a href="http://yzzx.tech">YZSA &copy; 2020 ITI</a> 
       </div>
     </transition>
   </div>

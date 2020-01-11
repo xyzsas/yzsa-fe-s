@@ -1,5 +1,7 @@
 "use strict";
 
+var SS = window.sessionStorage;
+
 axios.interceptors.request.use(
   function(config) {
     config.headers["id"] = window.sessionStorage["id"];
@@ -12,17 +14,21 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(
-  function(response) {
-    window.sessionStorage["token"] = response.headers["token"];
-    return response;
+  function(resp) {
+    SS["token"] = resp.headers["token"];
+    return resp;
   },
-  function(error) {
-    if (error.response) {
-      window.sessionStorage["token"] = error.response.headers["token"];
+  function(err) {
+    if (err.response) {
+      SS["token"] = err.response.headers["token"];
     }
-    return Promise.reject(error);
+    return Promise.reject(err);
   }
 );
+
+function Jump(url) {
+  window.location.href = url;
+}
 
 function CatchError(err) {
   let error = String(err);
@@ -35,10 +41,8 @@ function CatchError(err) {
     .then(() => {
       if (window.sessionStorage["token"] == 'undefined') {
         if (window.location.pathname.indexOf("task") != -1) {
-          window.location.href = "../../index.html";
-        } else if (window.location.pathname.indexOf("index.html") == -1) {
-          window.location.href = "./index.html";
-        }
+          Jump("../../index.html");
+        } else Jump("./index.html");
       }    
     });
 }

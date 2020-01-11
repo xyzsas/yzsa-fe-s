@@ -29,9 +29,7 @@ const app = new Vue({
     logout: function() {
       axios
         .delete("/api/C/auth")
-        .then(resp => {
-          window.location.href = "./index.html";
-        })
+        .then(Jump('./index.html'))
         .catch(CatchError);
     },
     taskStyle: function(task) {
