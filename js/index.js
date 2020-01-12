@@ -66,7 +66,7 @@ const app = new Vue({
                 swal("学生事务系统", "是否前往管理页面？", "info", {
                   buttons: ["进入一般用户界面", true]
                 }).then(value => {
-                    if (value) Jump("./admin/");
+                    if (value) Jump("/admin/");
                     else Jump("./home.html");
                   })
               } else Jump("./home.html");
