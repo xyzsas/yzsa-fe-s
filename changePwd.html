@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>学生事务系统</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="https://cdn.bootcss.com/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/jshashes/1.0.7/hashes.min.js"></script>
+</head>
+
+<body>
+  <div id="app" class="ccol">
+    <img class="logo" src="./img/yzzx/logo.png">
+    <transition name="fade">
+      <div class="loading ccol" v-if="loading">
+        <img src="./img/loading.svg">
+        <div class="mark">若等待时间过长，请刷新页面或更换浏览器登录（推荐使用最新版Chrome浏览器）</div>
+      </div>
+    </transition>
+    <transition name="fade" mode="out-in">
+      <div class="form ccol card">
+        <h1>学生事务系统</h1>
+        <h2>修改密码</h2>
+        <input class="round" type="password" placeholder="原密码" v-model="oldPwd" @keyup.enter="confirm" autofocus="autofocus">
+        <br>
+        <input class="round" type="password" placeholder="新密码" v-model="newPwd" @keyup.enter="confirm" autofocus="autofocus">
+        <br>
+        <input class="round" type="password" placeholder="确认密码" v-model="confirmPwd" @keyup.enter="confirm" autofocus="autofocus">
+        <div class="round button" @click="confirm">修改密码</div>
+        <a href="http://yzzx.tech">YZSA &copy; 2020 ITI</a>  
+      </div>
+    </transition>
+  </div>
+  <script src="./js/common.js"></script>
+  <script src="./js/changePwd.js"></script>
+</body>
