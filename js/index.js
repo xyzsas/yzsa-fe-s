@@ -1,7 +1,6 @@
 "use strict";
 
 const SALT = "Supported_by_ITI";
-var SS = window.sessionStorage;
 
 const app = new Vue({
   el: '#app',

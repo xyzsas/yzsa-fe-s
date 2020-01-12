@@ -40,6 +40,14 @@ img.logo {
   left: 5px;
 }
 
+.primary {
+  background-color: #1890ff;
+}
+
+.secondary {
+  background-color: #aaa;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }

@@ -32,7 +32,8 @@
         <input class="round" type="password" placeholder="新密码" v-model="newPwd" @keyup.enter="confirm" autofocus="autofocus">
         <br>
         <input class="round" type="password" placeholder="确认密码" v-model="confirmPwd" @keyup.enter="confirm" autofocus="autofocus">
-        <div class="round button" @click="confirm">修改密码</div>
+        <div class="round button primary" @click="confirm">修改密码</div>
+        <div class="round button secondary" style="margin-top: 0;" @click="back">返回</div>
         <a href="http://yzzx.tech">YZSA &copy; 2020 ITI</a>  
       </div>
     </transition>

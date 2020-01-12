@@ -4,8 +4,8 @@ var SS = window.sessionStorage;
 
 axios.interceptors.request.use(
   function(config) {
-    config.headers["id"] = window.sessionStorage["id"];
-    config.headers["token"] = window.sessionStorage["token"];
+    config.headers["id"] = SS["id"];
+    config.headers["token"] = SS["token"];
     return config;
   },
   function(error) {
