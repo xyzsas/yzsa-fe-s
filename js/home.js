@@ -40,6 +40,9 @@ const app = new Vue({
     doTask: function(task) {
       if (task.finish < this.timestamp || task.start > this.timestamp) return;
       window.location.href = `./task/${task.type}?id=${task.id}`;
+    },
+    changePwd: function() {
+      Jump('./changePwd.html')
     }
   }
 })

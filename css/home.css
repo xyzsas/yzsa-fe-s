@@ -30,7 +30,7 @@ div.profile h3 {
 }
 
 div.profile img {
-  max-width: 60%;
+  max-width: 55%;
 }
 
 h1 {
@@ -41,7 +41,7 @@ div.button {
   width: 50%;
   color: white;
   font-size: 1.2rem;
-  margin: 20px;
+  margin: 10px;
   text-align: center;
   background-color: #1890ff;
 }
