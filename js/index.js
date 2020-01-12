@@ -22,7 +22,7 @@ const app = new Vue({
         case 'username': return {
           step: '登录',
           inputType: 'text',
-          placeholder: '用户名（证件号）',
+          placeholder: '用户名/证件号',
           button: '下一步'
         }
         case 'password': return {
