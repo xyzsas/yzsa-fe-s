@@ -52,6 +52,7 @@ const app = new Vue({
           break;
         }
         case 'password': {
+          this.step = 'username';
           await axios
             .post("/api/C/auth", {
               id: this.username,
@@ -78,7 +79,7 @@ const app = new Vue({
       this.input = '';
       this.loading = false;
       await Sleep(600);
-      this.$refs.input.focus();
+      if (this.step === 'password') this.$refs.input.focus();
     }
   }
 })
