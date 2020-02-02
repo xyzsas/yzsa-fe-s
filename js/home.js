@@ -3,7 +3,8 @@
 const colors = {
   green: '#f6ffed',
   blue: '#e6f7ff',
-  red: '#fff1f0'
+  red: '#fff1f0',
+  grey: '#e8e8e8'
 };
 
 const app = new Vue({
@@ -35,6 +36,7 @@ const app = new Vue({
     taskStyle: function(task) {
       if (task.finish < this.timestamp) return "";
       if (task.start > this.timestamp) return `background: ${colors.blue};`;
+      if (task.start == 0 && task.end == 0) return `background: ${colors.grey}`;
       return `background: ${colors.green};`;
     },
     doTask: function(task) {
