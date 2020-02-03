@@ -14,8 +14,14 @@
 </head>
 
 <body>
-  <div id="apps">
-    
+  <div id="app">
+    <div class="content">
+      <h1 style="text-align: center; margin-top: 5vh;">{{title}}</h1>
+      <p>{{content}}</p>  
+    </div>
+    <div class="round button" :style="style" @click="read">已阅读</div>
+    <br/>
+    <div class="button round" @click="back" style="margin-bottom: 30px;">返回</div>
   </div>
   <script src="../../js/common.js"></script>
   <script src="./index.js"></script>

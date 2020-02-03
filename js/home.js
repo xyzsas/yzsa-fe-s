@@ -3,8 +3,7 @@
 const colors = {
   green: '#f6ffed',
   blue: '#e6f7ff',
-  red: '#fff1f0',
-  grey: '#e8e8e8'
+  red: '#fff1f0'
 };
 
 const app = new Vue({
@@ -36,11 +35,11 @@ const app = new Vue({
     taskStyle: function(task) {
       if (task.finish < this.timestamp) return "";
       if (task.start > this.timestamp) return `background: ${colors.blue};`;
-      if (task.start == 0 && task.end == 0) return `background: ${colors.grey}`;
       return `background: ${colors.green};`;
     },
     doTask: function(task) {
       if (task.finish < this.timestamp || task.start > this.timestamp) return;
+      window.sessionStorage["task"] = task.title;
       window.location.href = `./task/${task.type}?id=${task.id}`;
     },
     changePwd: function() {

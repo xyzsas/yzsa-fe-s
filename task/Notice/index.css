@@ -1,0 +1,32 @@
+
+.content {
+	text-align: left;
+	max-width: 80%;
+	width: 70vw;
+	margin-left: 15vw;
+	align-items: center;
+	min-height: 70vh;
+	height: 100%;
+	overflow: hidden;
+}
+
+p {
+	font-size: 1.3rem;
+}
+
+div.button {
+	width: 250px;
+	max-width: 80%;
+  font-size: 1.2rem;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid #91d5ff;
+  transition: 0.5s;
+}
+
+@media (min-width: 900px) {
+  div.button:hover {
+    box-shadow: 5px 5px 5px #ddd;
+    cursor: pointer;
+  }
+}
