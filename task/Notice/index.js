@@ -8,7 +8,8 @@ const app = new Vue({
     id: '',
     title: window.sessionStorage["task"],
     content: '',
-    style: 'display: block; pointer-events: none; background: #e8e8e8;'
+    style: 'display: block; pointer-events: none; background: #aaa;',
+    tip: '请仔细阅读'
   },
   mounted() {
     this.id = QueryString("id");
@@ -21,7 +22,10 @@ const app = new Vue({
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.content = resp.data.content;
-        setTimeout( () => {this.style = "display: ''; pointer-events: auto;"}, (Math.floor(this.content.length / 10) + 1) * 1000);
+        setTimeout( () => { 
+          this.style = "display: ''; pointer-events: auto; background: #1890ff";
+          this.tip = '已阅读';
+        }, (Math.floor(this.content.length / 10) + 1) * 1000);
       })
       .catch((error) => {
         swal("错误", error.response.data, "error")
