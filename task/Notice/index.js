@@ -1,6 +1,9 @@
 function goback() {
   window.location.href = "../../home.html";
 }
+function sleep(time) { // ms
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 
 const app = new Vue({
   el: '#app',
@@ -8,8 +11,8 @@ const app = new Vue({
     id: '',
     title: window.sessionStorage["task"],
     content: '',
-    style: 'display: block; pointer-events: none; background: #aaa;',
-    tip: '请仔细阅读'
+    style: 'display: block; pointer-events: none; background: #aaa; border: none;',
+    tip: '请仔细阅读 '
   },
   mounted() {
     this.id = QueryString("id");
@@ -22,10 +25,7 @@ const app = new Vue({
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.content = resp.data.content;
-        setTimeout( () => { 
-          this.style = "display: ''; pointer-events: auto; background: #1890ff";
-          this.tip = '已阅读';
-        }, (Math.floor(this.content.length / 10) + 1) * 1000);
+        this.readLimits()
       })
       .catch((error) => {
         swal("错误", error.response.data, "error")
@@ -45,6 +45,17 @@ const app = new Vue({
         .catch((error) => {
           swal("错误", error.response.data, "error")
         });
+    },
+    readLimits: async function() {
+      let interval = Math.floor(this.content.length / 10) + 1;
+        this.tip += interval.toString() + 's'
+        while (interval >= 0) {
+          this.tip = '请仔细阅读 ' + interval.toString() + 's'
+          interval--;
+          await sleep(1000);
+        }
+        this.tip = '已阅读';
+        this.style = "display: ''; background: #1890ff;"
     }
   }
 })
