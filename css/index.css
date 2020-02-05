@@ -5,20 +5,6 @@
   background-color: #f0f2f5;
 }
 
-div.loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-div.loading img {
-  width: 50px;
-}
-
 div.mark {
   position: absolute;
   bottom: 20px;

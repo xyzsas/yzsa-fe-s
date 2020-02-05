@@ -12,7 +12,8 @@ const app = new Vue({
     title: window.sessionStorage["task"],
     content: '',
     style: 'display: block; pointer-events: none; background: #aaa; border: none;',
-    tip: '请仔细阅读 '
+    tip: '请仔细阅读 ',
+    loading: true,
   },
   mounted() {
     this.id = QueryString("id");
@@ -24,7 +25,8 @@ const app = new Vue({
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.content = resp.data.content;
-        this.readLimits()
+        this.loading = false;
+        this.readLimits();
       })
       .catch((error) => {
         swal("错误", error.response.data, "error")
