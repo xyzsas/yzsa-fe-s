@@ -56,13 +56,21 @@ div.back {
 	width: 85%;
   font-size: 1.2rem;
   margin-bottom: 20px;
-  color: white;
   margin: 0 auto;
   text-align: center;
+  background: white;
+  color: black;
   border: 1px solid #1890ff;
   transition: 0.5s;
 }
 
 body {
   margin: 0;
+}
+
+@media (min-width: 900px) {
+  div.button:hover, div.back:hover {
+    box-shadow: 5px 5px 5px #ddd;
+    cursor: pointer;
+  }
 }
