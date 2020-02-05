@@ -5,7 +5,10 @@ function goback() {
 const app = new Vue({
   el: '#app',
   data: {
-    id: ''
+    id: '',
+    title: window.sessionStorage["task"],
+    lessons: [],
+    loading: true,
   },
   mounted() {
     this.id = QueryString("id");
@@ -16,11 +19,32 @@ const app = new Vue({
     axios
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
-        console.log(resp.data);
+        this.lessons = Object.keys(resp.data).map(i => [i, resp.data[i]]);
+        this.lessons.unshift(['课程名称', '剩余人数']);
+        this.loading = false;
       })
       .catch((error) => {
         swal("错误", error.response.data, "error")
           .then(goback);
       });
+  },
+  methods: {
+    enroll: function(item) {
+      axios.post(`/api/U/record/${this.id}`,{
+         "data": {
+          "course": item[0]
+        }
+      })
+        .then(resp => {
+          swal("成功", "选课成功", "success")
+        })
+        .catch(err => {
+          console.log(err.response)
+          swal("错误", err.response.data, "error")
+        })
+    },
+    back: function() {
+      goback();
+    }
   }
 })

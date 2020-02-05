@@ -16,7 +16,6 @@ const app = new Vue({
   },
   mounted() {
     this.id = QueryString("id");
-    console.log(this.title)
     if (!this.id) {
       swal('跑错啦！', '网页地址错误', "error")
         .then(goback)

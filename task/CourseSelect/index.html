@@ -7,15 +7,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>学生事务系统 - 选课</title>
   <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 </head>
 
 <body>
-  <div id="apps">
-    
+  <div id="app">
+    <h1 style="text-align: center; margin-top: 5vh;">{{title}}</h1>
+    <div class="loading ccol" v-if="loading" key="loading">
+      <img src="../../img/loading.svg">
+    </div>
+    <div class="content">
+      <div
+        v-for="item, index in lessons"
+        :key="index"
+        class="row"
+      >
+        <div class="col">{{item[0]}}</div>
+        <div class="col">{{item[1]}}</div>
+        <div class="col">
+          <div v-if="index !== 0" class="button primary" @click="enroll(item)">选课</div>
+          <div v-else >选择<iv>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="back round primary" @click="back">返回</div>
   <script src="../../js/common.js"></script>
   <script src="./index.js"></script>
 </body>
