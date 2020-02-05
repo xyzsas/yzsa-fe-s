@@ -1,13 +1,21 @@
+#app {
+  width: 100%;
+  min-height: calc(100vh - 90px);
+  height: 100%;
+  padding-top: 90px;
+  display: flex;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #f0f2f5;
+}
 
 .content {
 	text-align: left;
-	max-width: 80%;
+	max-width: 90%;
 	width: 70vw;
-	margin-left: 15vw;
 	align-items: center;
 	min-height: 70vh;
 	height: 100%;
-	overflow: hidden;
 }
 
 p {
@@ -15,7 +23,7 @@ p {
 }
 
 div.button {
-	width: 70%;
+	width: 70vw;
   font-size: 1.2rem;
   color: white;
   margin: 0 auto;

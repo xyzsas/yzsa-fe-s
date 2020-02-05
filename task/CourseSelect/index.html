@@ -15,11 +15,17 @@
 
 <body>
   <div id="app">
-    <h1 style="text-align: center; margin-top: 5vh;">{{title}}</h1>
+    <img class="logo" src="../../img/yzzx/logo.png">
+    <h1 style="text-align: center; margin-top: 80px;">{{title}}</h1>
     <div class="loading ccol" v-if="loading" key="loading">
       <img src="../../img/loading.svg">
     </div>
     <div class="content">
+      <div class="row trow">
+        <div class="col tcol">课程名称</div>
+        <div class="col tcol">剩余人数</div>
+        <div class="col tcol">选择该课</div>
+      </div>
       <div
         v-for="item, index in lessons"
         :key="index"
@@ -28,13 +34,13 @@
         <div class="col">{{item[0]}}</div>
         <div class="col">{{item[1]}}</div>
         <div class="col">
-          <div v-if="index !== 0" class="button primary" @click="enroll(item)">选课</div>
-          <div v-else >选择<iv>
+          <div class="button primary" @click="enroll(item)">选课</div>
         </div>
       </div>
     </div>
-  </div>
   <div v-if="!loading" class="back round" @click="back">返回</div>
+  <br />
+  </div>
   <script src="../../js/common.js"></script>
   <script src="./index.js"></script>
 </body>

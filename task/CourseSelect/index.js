@@ -20,7 +20,6 @@ const app = new Vue({
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.lessons = Object.keys(resp.data).map(i => [i, resp.data[i]]);
-        this.lessons.unshift(['课程名称', '剩余人数']);
         this.loading = false;
       })
       .catch((error) => {
@@ -44,6 +43,7 @@ const app = new Vue({
         })
     },
     back: function() {
+      console.log('here')
       goback();
     }
   }

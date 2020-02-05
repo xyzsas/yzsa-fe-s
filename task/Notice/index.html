@@ -15,17 +15,21 @@
 
 <body>
   <div id="app">
+    <img class="logo" src="../../img/yzzx/logo.png">
     <div class="loading ccol" v-if="loading" key="loading">
       <img src="../../img/loading.svg">
     </div>
-    <div class="content">
-      <h1 style="text-align: center; margin-top: 5vh;">{{title}}</h1>
-      <p>{{content}}</p>  
-    </div>
-    <div v-if="!loading">
-      <div class="round button" :style="style" @click="read">{{tip}}</div>
-      <br/>
-      <div class="button round" @click="back" style="margin-bottom: 20px; background: white; color: black;">返回</div>
+    <div class="card ccol" style="width: 80%; justify-content: flex-start; background: white; text-align: center;">
+      <div class="content">
+        <h1 style="text-align: center;">{{title}}</h1>
+        <p>{{content}}</p>  
+      </div>
+      <div v-if="!loading">
+        <div class="round button" :style="style" @click="read">{{tip}}</div>
+        <br/>
+        <div class="button round" @click="back" style="background: white; color: black;">返回</div>
+        <br/>
+      </div>
     </div>
   </div>
   <script src="../../js/common.js"></script>
