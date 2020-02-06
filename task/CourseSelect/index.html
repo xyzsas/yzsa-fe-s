@@ -16,30 +16,27 @@
 <body>
   <div id="app">
     <img class="logo" src="../../img/yzzx/logo.png">
-    <h1 style="text-align: center; margin-top: 80px;">{{title}}</h1>
+    
     <div class="loading ccol" v-if="loading" key="loading">
       <img src="../../img/loading.svg">
     </div>
-    <div class="content">
-      <div class="row trow">
-        <div class="col tcol">课程名称</div>
-        <div class="col tcol">剩余人数</div>
-        <div class="col tcol">选择该课</div>
-      </div>
-      <div
-        v-for="item, index in lessons"
-        :key="index"
-        class="row"
-      >
-        <div class="col">{{item[0]}}</div>
-        <div class="col">{{item[1]}}</div>
-        <div class="col">
-          <div class="button primary" @click="enroll(item)">选课</div>
+    <div class="courses ccol">
+      <p class="crow">请从下列课程中选择</p>
+      <div class="crow">
+        <div class="ccol">
+          <div v-for="(lesson, index) in lessons" v-if="index % 2 === 0" class="course round" :style="courseStyle(lesson)" @click="enroll(lesson)">
+            <h3>&nbsp&nbsp&nbsp&nbsp{{lesson[0]}}({{lesson[1]}})</h3>
+          </div>
+        </div>
+        <div class="ccol">
+          <div v-for="(lesson, index) in lessons" v-if="index % 2 === 1" class="course round" :style="courseStyle(lesson)" @click="enroll(lesson)">
+            <h3>&nbsp&nbsp&nbsp&nbsp{{lesson[0]}}({{lesson[1]}})</h3>
+          </div>
         </div>
       </div>
     </div>
-  <div v-if="!loading" class="back round" @click="back">返回</div>
-  <br />
+    <div v-if="!loading" class="button" @click="back">返回</div>
+    <br />
   </div>
   <script src="../../js/common.js"></script>
   <script src="./index.js"></script>

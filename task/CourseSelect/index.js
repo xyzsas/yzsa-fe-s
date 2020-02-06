@@ -2,6 +2,11 @@ function goback() {
   window.location.href = "../../home.html";
 }
 
+const colors = {
+  blue: '#e6f7ff',
+  grey: '#aaa',
+};
+
 const app = new Vue({
   el: '#app',
   data: {
@@ -19,7 +24,13 @@ const app = new Vue({
     axios
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
-        this.lessons = Object.keys(resp.data).map(i => [i, resp.data[i]]);
+        this.lessons = Object.keys(resp.data).map(i => [i, resp.data[i], '选课', '']);
+        for (let i = 0; i < this.lessons.length; i++) {
+          if (this.lessons[i][1] === '0') {
+            this.lessons[i][2] = '已选完';
+            this.lessons[i][3] = 'background: #aaa; pointer-events: none; '
+          }
+        }
         this.loading = false;
       })
       .catch((error) => {
@@ -29,6 +40,7 @@ const app = new Vue({
   },
   methods: {
     enroll: function(item) {
+      if (item[1] === '0') return;
       axios.post(`/api/U/record/${this.id}`,{
          "data": {
           "course": item[0]
@@ -41,6 +53,10 @@ const app = new Vue({
           console.log(err.response)
           swal("错误", err.response.data, "error")
         })
+    },
+    courseStyle(course) {
+      if (course[1] === '0') return `background: ${colors.grey}; pointer-events: none; `;
+      return `background: ${colors.blue};`;
     },
     back: function() {
       console.log('here')
