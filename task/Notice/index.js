@@ -1,7 +1,3 @@
-function sleep(time) { // ms
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
 const app = new Vue({
   el: '#app',
   data: {
@@ -10,41 +6,37 @@ const app = new Vue({
     content: '',
     style: 'display: block; pointer-events: none; background: #aaa; border: none;',
     tip: '请仔细阅读 ',
-    loading: true,
+    loading: true
   },
   mounted() {
     this.id = QueryString("id");
     if (!this.id) {
       swal('跑错啦！', '网页地址错误', "error")
-        .then(Jump("../../home.html"))
+        .then(() => { Jump("../../home.html"); });
     }
     axios
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.content = resp.data.content;
         this.loading = false;
-        this.readLimits();
       })
-      .catch((error) => {
-        swal("错误", error.response.data, "error")
-          .then(Jump("../../home.html"));
-      });
+      .catch(CatchError);
   },
   methods: {
     back: function() {
       Jump("../../home.html");
     },
-    read: function() {
-      axios
+    read: async function() {
+      this.loading = true;
+      await axios
         .post(`/api/U/record/${this.id}`)
         .then(resp => {
-          swal("成功", "阅读完成", "success");
+          swal("成功", "回执提交成功", "success");
         })
-        .catch((error) => {
-          swal("错误", error.response.data, "error")
-        });
+        .catch(CatchError);
+      this.loading = false;
     },
-    readLimits: async function() {
+    countDown: function() {
       let interval = Math.floor(this.content.length / 10) + 1;
         this.tip += interval.toString() + 's'
         while (interval >= 0) {
