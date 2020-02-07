@@ -30,7 +30,7 @@ const app = new Vue({
   },
   methods: {
     enroll: async function(c) {
-      if (!this.courses[c]) return;
+      if (this.courses[c] == "0") return;
       this.loading = true;
       await axios
         .post(`/api/U/record/${this.id}`, { course: c })
