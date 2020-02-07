@@ -11,6 +11,7 @@ const app = new Vue({
   data: {
     name: window.sessionStorage["name"],
     id: window.sessionStorage["id"],
+    tip: "加载中 ...",
     timestamp: 0,
     tasklist: []
   },
@@ -22,6 +23,7 @@ const app = new Vue({
       .get("/api/U/task")
       .then(resp => {
         this.tasklist = resp.data;
+        this.tip = "任务会自动开放，请勿反复刷新"
       })
       .catch(CatchError);
   },
@@ -33,12 +35,12 @@ const app = new Vue({
         .catch(CatchError);
     },
     taskStyle: function(task) {
-      if (task.finish < this.timestamp) return "";
+      if (task.end < this.timestamp) return "";
       if (task.start > this.timestamp) return `background: ${colors.blue};`;
       return `background: ${colors.green};`;
     },
     doTask: function(task) {
-      if (task.finish < this.timestamp || task.start > this.timestamp) return;
+      if (task.end < this.timestamp || task.start > this.timestamp) return;
       window.sessionStorage["task"] = task.title;
       window.location.href = `./task/${task.type}?id=${task.id}`;
     },

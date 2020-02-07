@@ -24,7 +24,7 @@
     </div>
     <div class="tasklist card ccol">
       <h1>任务列表</h1>
-      <p>本页会自动刷新</p>
+      <p>{{tip}}</p>
       <div v-for="task in tasklist" class="task round" :style="taskStyle(task)" @click="doTask(task)">
         <h3>{{task.title}}</h3>
       </div>
