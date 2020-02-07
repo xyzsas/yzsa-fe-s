@@ -18,6 +18,7 @@ const app = new Vue({
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.content = resp.data.content;
+        this.countDown();
         this.loading = false;
       })
       .catch(CatchError);
@@ -36,13 +37,13 @@ const app = new Vue({
         .catch(CatchError);
       this.loading = false;
     },
-    countDown: function() {
+    countDown: async function() {
       let interval = Math.floor(this.content.length / 10) + 1;
         this.tip += interval.toString() + 's'
         while (interval >= 0) {
           this.tip = '请仔细阅读 ' + interval.toString() + 's'
           interval--;
-          await sleep(1000);
+          await Sleep(1000);
         }
         this.tip = '已阅读';
         this.style = "display: ''; background: #1890ff;"
