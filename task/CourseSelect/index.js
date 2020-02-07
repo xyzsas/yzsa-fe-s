@@ -1,7 +1,3 @@
-function goback() {
-  window.location.href = "../../home.html";
-}
-
 const colors = {
   blue: '#e6f7ff',
   grey: '#aaa',
@@ -11,7 +7,6 @@ const app = new Vue({
   el: '#app',
   data: {
     id: '',
-    title: window.sessionStorage["task"],
     lessons: [],
     loading: true,
   },
@@ -24,18 +19,12 @@ const app = new Vue({
     axios
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
-        this.lessons = Object.keys(resp.data).map(i => [i, resp.data[i], '选课', '']);
-        for (let i = 0; i < this.lessons.length; i++) {
-          if (this.lessons[i][1] === '0') {
-            this.lessons[i][2] = '已选完';
-            this.lessons[i][3] = 'background: #aaa; pointer-events: none; '
-          }
-        }
+        this.lessons = Object.keys(resp.data).map(i => [i, resp.data[i]]);
         this.loading = false;
       })
       .catch((error) => {
         swal("错误", error.response.data, "error")
-          .then(goback);
+          .then(Jump("../../home.html"));
       });
   },
   methods: {
@@ -50,7 +39,6 @@ const app = new Vue({
           swal("成功", "选课成功", "success")
         })
         .catch(err => {
-          console.log(err.response)
           swal("错误", err.response.data, "error")
         })
     },
@@ -59,8 +47,7 @@ const app = new Vue({
       return `background: ${colors.blue};`;
     },
     back: function() {
-      console.log('here')
-      goback();
+      Jump("../../home.html");
     }
   }
 })

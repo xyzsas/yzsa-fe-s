@@ -1,6 +1,3 @@
-function goback() {
-  window.location.href = "../../home.html";
-}
 function sleep(time) { // ms
   return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -19,7 +16,7 @@ const app = new Vue({
     this.id = QueryString("id");
     if (!this.id) {
       swal('跑错啦！', '网页地址错误', "error")
-        .then(goback)
+        .then(Jump("../../home.html"))
     }
     axios
       .get(`/api/U/task/${this.id}`)
@@ -30,12 +27,12 @@ const app = new Vue({
       })
       .catch((error) => {
         swal("错误", error.response.data, "error")
-          .then(goback);
+          .then(Jump("../../home.html"));
       });
   },
   methods: {
     back: function() {
-      goback();
+      Jump("../../home.html");
     },
     read: function() {
       axios
