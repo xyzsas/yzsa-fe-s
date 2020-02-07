@@ -33,7 +33,7 @@ function Jump(url) {
 function CatchError(err) {
   let error = String(err);
   let title = "错误"
-  if (err.response) {
+  if (err && err.response) {
     if (err.response.status == 425) title = "安全风险";
     error = err.response.data;
   } 
