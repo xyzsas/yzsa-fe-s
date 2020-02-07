@@ -24,12 +24,8 @@
         <h1 style="text-align: center;">{{title}}</h1>
         <div v-html="content"></div>  
       </div>
-      <div v-if="!loading">
-        <div class="round button" :style="style" @click="read">{{tip}}</div>
-        <br/>
-        <div class="button round" @click="back" style="background: white; color: black;">返回</div>
-        <br/>
-      </div>
+      <div class="round button" :style="readStyle" @click="read">{{tip}}</div>
+      <div class="button round" @click="back">返回</div>
     </div>
   </div>
   <script src="../../js/common.js"></script>

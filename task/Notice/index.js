@@ -1,11 +1,12 @@
+var timer;
+
 const app = new Vue({
   el: '#app',
   data: {
     id: '',
     title: window.sessionStorage["task"],
     content: '',
-    style: 'display: block; pointer-events: none; background: #aaa; border: none;',
-    tip: '请仔细阅读 ',
+    timeLeft: 666666,
     loading: true
   },
   mounted() {
@@ -18,9 +19,23 @@ const app = new Vue({
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.content = resp.data.content;
+        this.startCountDown();
         this.loading = false;
       })
-      .catch(CatchError);
+      .catch(() => {
+        CatchError();
+        Jump("../../home.html");
+      });
+  },
+  computed: {
+    tip: function() {
+      if (this.timeLeft <= 0) return "已阅读";
+      else return `请仔细阅读 ${this.timeLeft}s`;
+    },
+    readStyle: function() {
+      if (this.timeLeft > 0) return "";
+      else return "background: #e6f7ff;";
+    }
   },
   methods: {
     back: function() {
@@ -30,22 +45,19 @@ const app = new Vue({
       this.loading = true;
       await axios
         .post(`/api/U/record/${this.id}`)
-        .then(resp => {
+        .then(() => {
           swal("成功", "回执提交成功", "success");
         })
         .catch(CatchError);
       this.loading = false;
     },
+    startCountDown: function() {
+      this.timeLeft = Math.floor(this.content.length / 10) + 10;
+      timer = setInterval(this.countDown, 1000);
+    },
     countDown: function() {
-      let interval = Math.floor(this.content.length / 10) + 1;
-        this.tip += interval.toString() + 's'
-        while (interval >= 0) {
-          this.tip = '请仔细阅读 ' + interval.toString() + 's'
-          interval--;
-          await sleep(1000);
-        }
-        this.tip = '已阅读';
-        this.style = "display: ''; background: #1890ff;"
+      this.timeLeft--;
+      if (this.timeLeft <= 0) clearInterval(timer);
     }
   }
 })
