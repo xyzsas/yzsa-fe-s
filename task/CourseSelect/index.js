@@ -36,7 +36,7 @@ const app = new Vue({
       if (this.courses[c] == "0") return;
       this.loading = true;
       await axios
-        .post(`/api/U/record/${this.id}`, { course: c })
+        .post(`/api/U/record/${this.id}`, { data: { course: c } })
         .then(resp => {
           swal("成功", "选课成功", "success")
             .then(this.back);
