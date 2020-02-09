@@ -9,13 +9,19 @@ const colors = {
 const app = new Vue({
   el: '#app',
   data: {
-    name: window.sessionStorage["name"],
-    id: window.sessionStorage["id"],
+    name: SS["name"],
+    id: SS["id"],
     tip: "加载中 ...",
     timestamp: 0,
     tasklist: []
   },
   mounted() {
+    let callback = SS["callback"]
+    if (callback) {
+      SS.removeItem("callback");
+      Jump(callback);
+      return;
+    }
     setInterval(() => {
       this.timestamp = Math.floor(new Date().getTime() / 1000);
     }, 1000);
@@ -31,7 +37,11 @@ const app = new Vue({
     logout: function() {
       axios
         .delete("/api/C/auth")
-        .then(Jump('./index.html'))
+        .then(() => {
+          SS.removeItem("id");
+          SS.removeItem("token");
+          Jump('./index.html');
+        })
         .catch(CatchError);
     },
     taskStyle: function(task) {

@@ -30,6 +30,7 @@ function Jump(url) {
   window.location.href = url;
 }
 
+// universal error handle
 function CatchError(err) {
   let error = String(err);
   let title = "错误"
@@ -39,7 +40,7 @@ function CatchError(err) {
   } 
   swal(title, error, "error")
     .then(() => {
-      if (window.sessionStorage["token"] == 'undefined') {
+      if (SS["token"] == 'undefined') {
         if (window.location.pathname.indexOf("task") != -1) {
           Jump("../../index.html");
         } else Jump("./index.html");
@@ -57,8 +58,27 @@ function Sleep(ms){
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// find query
 function QueryString(name) {
   var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
   if (result == null || result.length < 1) return "";
   return result[1];
+}
+
+// check at task initialization
+function TaskCheck(task) {
+  if (!task) {
+    swal('跑错啦!', '网页地址错误', "error")
+      .then(() => { Jump("../../home.html"); });
+    return false;
+  }
+  if (!SS["token"] || SS["token"] == "undefined") {
+    swal('未登录', '请先前往登录！', "error")
+      .then(() => {
+        SS["callback"] = window.location.href;
+        Jump("../../index.html");
+      });
+    return false;
+  }
+  return true;
 }

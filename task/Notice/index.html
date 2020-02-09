@@ -24,7 +24,7 @@
         <h1 style="text-align: center;">{{title}}</h1>
         <div v-html="content"></div>  
       </div>
-      <div class="round button" :style="readStyle" @click="read">{{tip}}</div>
+      <div class="round button" :style="readStyle" v-if="!done" @click="read">{{tip}}</div>
       <div class="button round" @click="back">返回</div>
     </div>
   </div>
