@@ -51,8 +51,7 @@ const app = new Vue({
     },
     doTask: function(task) {
       if (task.end < this.timestamp || task.start > this.timestamp) return;
-      window.sessionStorage["task"] = task.title;
-      window.location.href = `./task/${task.type}?id=${task.id}`;
+      window.location.href = `./task/${task.type}?id=${task.id}&title=${task.title}`;
     },
     changePwd: function() {
       Jump('./changePwd.html')

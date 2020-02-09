@@ -62,7 +62,7 @@ function Sleep(ms){
 function QueryString(name) {
   var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
   if (result == null || result.length < 1) return "";
-  return result[1];
+  return decodeURI(result[1]);
 }
 
 // check at task initialization

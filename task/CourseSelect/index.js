@@ -9,7 +9,7 @@ const app = new Vue({
   el: '#app',
   data: {
     id: '',
-    title: SS["task"],
+    title: QueryString("title"),
     courses: {},
     done: false,
     loading: true

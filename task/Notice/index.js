@@ -4,7 +4,7 @@ const app = new Vue({
   el: '#app',
   data: {
     id: '',
-    title: SS["task"],
+    title: QueryString("title"),
     content: '',
     timeLeft: 666666,
     done: false,
