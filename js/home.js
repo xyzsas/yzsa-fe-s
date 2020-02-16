@@ -12,7 +12,7 @@ const app = new Vue({
     name: SS["name"],
     id: SS["id"],
     tip: "加载中 ...",
-    timestamp: 0,
+    timestamp: Math.floor(new Date().getTime() / 1000),
     tasklist: []
   },
   mounted() {
@@ -22,18 +22,24 @@ const app = new Vue({
       Jump(callback);
       return;
     }
-    setInterval(() => {
-      this.timestamp = Math.floor(new Date().getTime() / 1000);
-    }, 1000);
+    setInterval(this.fresh, 1000);
     axios
       .get("/api/U/task")
       .then(resp => {
         this.tasklist = resp.data;
-        this.tip = "任务会自动开放，请勿反复刷新"
+        this.tip = "任务会自动开放，请勿反复刷新";
+        this.fresh();
       })
       .catch(CatchError);
   },
   methods: {
+    fresh: function() {
+      let t = Math.floor(new Date().getTime() / 1000);
+      this.tasklist.sort((a, b) => {
+        return Math.abs(a.start - t) - Math.abs(b.start - t); 
+      });
+      this.timestamp = t;
+    },
     logout: function() {
       axios
         .delete("/api/C/auth")

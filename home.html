@@ -25,7 +25,7 @@
     <div class="tasklist card ccol">
       <h1>任务列表</h1>
       <p>{{tip}}</p>
-      <div v-for="task in tasklist" class="task round" :style="taskStyle(task)" @click="doTask(task)">
+      <div v-if="timestamp" v-for="task in tasklist" class="task round" :style="taskStyle(task)" @click="doTask(task)">
         <h3>{{task.title}}</h3>
       </div>
     </div>
