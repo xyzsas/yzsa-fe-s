@@ -36,7 +36,12 @@ const app = new Vue({
     fresh: function() {
       let t = Math.floor(new Date().getTime() / 1000);
       this.tasklist.sort((a, b) => {
-        return Math.abs(a.start - t) - Math.abs(b.start - t); 
+        let alpha = 1; let beta = 1; // default open
+        if (a.end < t) alpha = -1; // ended
+        if (a.start > t) alpha = 0; // not yet open
+        if (b.end < t) beta = -1;
+        if (b.start > t) beta = 0;
+        return beta - alpha;
       });
       this.timestamp = t;
     },

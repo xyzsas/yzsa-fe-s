@@ -11,10 +11,11 @@ const app = new Vue({
     username: '',
     random: ''
   },
-  mounted: function() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+  mounted: async function() {
+    await Sleep(500);
+    this.loading = false;
+    await Sleep(1000);
+    this.$refs.input.focus();
   },
   computed: {
     tips: function() {
