@@ -6,6 +6,8 @@ const colors = {
   red: '#fff1f0'
 };
 
+let timer;
+
 const app = new Vue({
   el: '#app',
   data: {
@@ -22,7 +24,7 @@ const app = new Vue({
       Jump(callback);
       return;
     }
-    setInterval(this.fresh, 1000);
+    timer = setInterval(this.fresh, 1000);
     axios
       .get("/api/U/task")
       .then(resp => {
@@ -31,6 +33,9 @@ const app = new Vue({
         this.fresh();
       })
       .catch(CatchError);
+  },
+  beforeDestroy() {
+    clearInterval(timer);
   },
   methods: {
     fresh: function() {

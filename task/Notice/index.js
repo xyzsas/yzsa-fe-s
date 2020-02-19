@@ -31,6 +31,9 @@ const app = new Vue({
       });
     this.loading = false;
   },
+  beforeDestroy() {
+    clearInterval(timer);
+  },
   computed: {
     tip: function() {
       if (this.timeLeft <= 0) return "已阅读";
