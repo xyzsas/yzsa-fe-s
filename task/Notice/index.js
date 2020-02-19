@@ -7,6 +7,7 @@ const app = new Vue({
     title: QueryString("title"),
     content: '',
     timeLeft: 666666,
+    readTime: 0,
     done: false,
     loading: true
   },
@@ -21,6 +22,7 @@ const app = new Vue({
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.content = resp.data.content;
+        this.readTime = resp.data.readTime;
         if (!this.done) this.startCountDown();
       })
       .catch(() => {
@@ -55,7 +57,8 @@ const app = new Vue({
       this.loading = false;
     },
     startCountDown: function() {
-      this.timeLeft = Math.floor(this.content.length / 10) + 10;
+      if (!this.readTime) this.readTime = Math.floor(this.content.length / 10) + 10;
+      this.timeLeft = this.readTime;
       timer = setInterval(this.countDown, 1000);
     },
     countDown: function() {
