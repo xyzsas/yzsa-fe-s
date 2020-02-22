@@ -7,6 +7,10 @@ body {
   font-family: sans-serif;
 }
 
+[v-cloak] {
+  opacity: 0;
+}
+
 .crow {
   display: flex;
   justify-content: center;
