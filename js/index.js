@@ -2,6 +2,8 @@
 
 const SALT = "Supported_by_ITI";
 
+let beginTime;
+
 const app = new Vue({
   el: '#app',
   data: {
@@ -39,10 +41,11 @@ const app = new Vue({
     act: async function() {
       if (this.loading) return;
       if (!this.input) return;
-      this.loading = true;
       switch (this.step) {
         case 'username': {
           this.username = this.input;
+          beginTime = Math.floor(new Date().getTime() / 1000);
+          this.loading = true;
           await axios
             .get("/api/C/auth?id=" + this.username)
             .then(resp => {
@@ -53,7 +56,13 @@ const app = new Vue({
           break;
         }
         case 'password': {
+          let now = new Date().getTime() / 1000;
+          if (now - beginTime < 3) {
+            swal("安全风险", "您的密码输入速度太快", "error");
+            return;
+          }
           this.step = 'username';
+          this.loading = true;
           await axios
             .post("/api/C/auth", {
               id: this.username,

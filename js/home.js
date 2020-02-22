@@ -65,6 +65,12 @@ const app = new Vue({
       if (task.start > this.timestamp) return `background: ${colors.blue};`;
       return `background: ${colors.green};`;
     },
+    taskTitle: function(task) {
+      let suffix = "";
+      if (task.end < this.timestamp) suffix = " (已结束)";
+      if (task.start > this.timestamp) suffix = " (未开始)";
+      return task.title + suffix;
+    },
     doTask: function(task) {
       if (task.end < this.timestamp || task.start > this.timestamp) return;
       window.location.href = `./task/${task.type}?id=${task.id}&title=${task.title}`;

@@ -34,8 +34,8 @@ const app = new Vue({
       .then(resp => {
         this.courses = resp.data;
       })
-      .catch(() => {
-        CatchError();
+      .catch(err => {
+        CatchError(err);
         Jump("../../home.html");
       });
     this.loading = false;

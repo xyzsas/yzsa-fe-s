@@ -26,7 +26,7 @@
       <h1>任务列表</h1>
       <p>{{tip}}</p>
       <div v-if="timestamp" v-for="task in tasklist" class="task round" :style="taskStyle(task)" @click="doTask(task)">
-        <h3>{{task.title}}</h3>
+        <h3>{{taskTitle(task)}}</h3>
       </div>
     </div>
   </div>

@@ -17,16 +17,16 @@ div.card {
 }
 
 .content {
-  text-align: left;
-  max-width: 90%;
-  width: 70%;
-  align-items: center;
-  min-height: calc(100vh - 550px);
-  height: 100%;
+	text-align: left;
+	width: 70%;
+	align-items: center;
+	min-height: calc(100vh - 600px);
+	height: 100%;
+  margin-bottom: 30px;
 }
 
 div.button {
-  width: 80%;
+	width: 80%;
   font-size: 1.2rem;
   margin: 10px auto;
   text-align: center;
@@ -35,9 +35,35 @@ div.button {
   transition: 0.5s;
 }
 
+div.chosen {
+  background: #e6f7ff;
+}
+
+textarea {
+  width: calc(100% - 40px);
+  min-height: calc(100% - 200px);
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f3f5f7;
+}
+
 @media (min-width: 900px) {
   div.button:hover {
     box-shadow: 5px 5px 5px #ddd;
     cursor: pointer;
+  }
+}
+
+@media (max-width: 600px) {
+  div.card {
+    width: 90%;
+  }
+  div.content {
+    width: 90%;
+  }
+  div.choice {
+    padding: 10px 15px;
+    font-style: 0.9rem;
   }
 }
