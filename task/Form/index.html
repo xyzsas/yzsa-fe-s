@@ -25,7 +25,7 @@
         <h3>{{indexes[I]}}.&nbsp;{{q.question}}</h3>
         <textarea v-model="text" :placeholder="'请输入回答，最长' + q.max + '字'" v-if="q.type == 'fill'"></textarea>
         <div v-if="q.type == 'choose'">
-          请点击选项，蓝色为选中。
+          请点击选择{{q.min == q.max ? q.min : `${q.min}-${q.max}`}}个选项，蓝色为选中。
           <div v-for="v,k in q.choice" :class="['round', 'button', 'choice', {'chosen': chosen[k]}]" @click="choose(k)" style="text-align: left;">{{k}}. {{v}}</div>
         </div>
       </div>
