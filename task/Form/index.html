@@ -25,8 +25,11 @@
         <h3>{{indexes[I]}}.&nbsp;{{q.question}}</h3>
         <textarea v-model="text" :placeholder="'请输入回答，最长' + q.max + '字'" v-if="q.type == 'fill'"></textarea>
         <div v-if="q.type == 'choose'">
-          请点击选择{{q.min == q.max ? q.min : `${q.min}-${q.max}`}}个选项，蓝色为选中。
-          <div v-for="v,k in q.choice" :class="['round', 'button', 'choice', {'chosen': chosen[k]}]" @click="choose(k)" style="text-align: left;">{{k}}. {{v}}</div>
+          请点击选择{{q.min == q.max ? q.min : `${q.min}-${q.max}`}}个选项，再次点击可取消选择。
+          <div v-for="v,k in q.choice" :class="['round', 'button', 'choice', {'chosen': chosen[k]}]" @click="choose(k)">
+            <img :src="chosen[k] ? './check-box.svg' : './check-box-blank.svg'">
+            <span style="margin-left: 10px;">{{k}}. {{v}}</span>
+          </div>
         </div>
       </div>
       <div class="round button chosen" v-if="!done" @click="next">{{tip}}</div>

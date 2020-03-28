@@ -35,6 +35,11 @@ div.button {
   transition: 0.5s;
 }
 
+div.choice {
+  display: flex;
+  align-items: center;
+}
+
 div.chosen {
   background: #e6f7ff;
 }
