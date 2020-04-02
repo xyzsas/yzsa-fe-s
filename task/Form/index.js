@@ -94,6 +94,8 @@ const app = new Vue({
       }
     },
     submit: async function() {
+      let confirm = await swal("确认提交？", "提交以后不能修改", "info");
+      if (!confirm) return;
       this.loading = true;
       await axios
         .post(`/api/U/record/${this.id}`, { data: this.response })

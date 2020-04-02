@@ -39,6 +39,10 @@ const app = new Vue({
   },
   methods: {
     fresh: function() {
+      if (!this.tasklist) {
+        this.tasklist = [];
+        return;
+      }
       let t = Math.floor(new Date().getTime() / 1000);
       this.tasklist.sort((a, b) => {
         let alpha = 1; let beta = 1; // default open
