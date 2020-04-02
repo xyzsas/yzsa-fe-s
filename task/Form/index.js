@@ -94,7 +94,9 @@ const app = new Vue({
       }
     },
     submit: async function() {
-      let confirm = await swal("确认提交？", "提交以后不能修改", "info");
+      let confirm = await swal("确认提交？", "提交以后不能修改", "info", {
+        buttons: ["取消", true]
+      });
       if (!confirm) return;
       this.loading = true;
       await axios
