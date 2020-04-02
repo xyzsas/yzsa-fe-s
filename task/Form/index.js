@@ -53,7 +53,10 @@ const app = new Vue({
     next: function() {
       if (!this.check()) return;
       if (this.I < this.indexes.length-1) this.I++;
-      else this.submit();
+      else {
+        this.submit();
+        return;
+      }
       this.text = "";
       this.chosen = {};
       this.q = this.form[this.indexes[this.I]];
