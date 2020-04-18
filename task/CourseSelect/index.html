@@ -20,9 +20,14 @@
     <div class="loading ccol" v-if="loading" key="loading">
       <img src="../../img/loading.svg">
     </div>
-    <h1>{{title}}</h1>
+    <div style="padding-left: 10px; padding-right: 10px; max-width: 85%; text-align: center;">
+      <h1>{{title}}</h1>
+      <p>小括号内数字为剩于名额</p>
+    </div>
     <div class="courses">
-      <div v-for="(n, c) in courses" class="course round" :style="courseStyle(c)" @click="enroll(c)">{{c}}&nbsp;({{n}})</div>
+      <div v-for="(n, c) in courses" class="course round" :style="courseStyle(c)" @click="enroll(c)">
+        <span>{{c}}</span><span style="float: right;"><b>({{n}})</b></span>
+      </div>
     </div>
     <div v-if="!loading" class="button" @click="back">返回</div>
     <br />
