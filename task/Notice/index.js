@@ -4,28 +4,35 @@ const app = new Vue({
   el: '#app',
   data: {
     id: '',
-    title: window.sessionStorage["task"],
+    title: QueryString("title"),
     content: '',
     timeLeft: 666666,
+    readTime: 0,
+    done: false,
     loading: true
   },
-  mounted() {
+  mounted: async function() {
     this.id = QueryString("id");
-    if (!this.id) {
-      swal('跑错啦！', '网页地址错误', "error")
-        .then(() => { Jump("../../home.html"); });
-    }
-    axios
+    if (!TaskCheck(this.id)) return;
+    await axios // look for record
+      .get(`/api/U/record/${this.id}`)
+      .then(resp => { this.done = true; })
+      .catch(err => { return; });
+    await axios // pull task data
       .get(`/api/U/task/${this.id}`)
       .then(resp => {
         this.content = resp.data.content;
-        this.startCountDown();
-        this.loading = false;
+        this.readTime = resp.data.readTime;
+        if (!this.done) this.startCountDown();
       })
-      .catch(() => {
-        CatchError();
+      .catch(err => {
+        CatchError(err);
         Jump("../../home.html");
       });
+    this.loading = false;
+  },
+  beforeDestroy() {
+    clearInterval(timer);
   },
   computed: {
     tip: function() {
@@ -46,13 +53,15 @@ const app = new Vue({
       await axios
         .post(`/api/U/record/${this.id}`)
         .then(() => {
-          swal("成功", "回执提交成功", "success");
+          swal("成功", "回执提交成功", "success")
+            .then(() => { this.done = true; });
         })
         .catch(CatchError);
       this.loading = false;
     },
     startCountDown: function() {
-      this.timeLeft = Math.floor(this.content.length / 10) + 10;
+      if (!this.readTime) this.readTime = Math.floor(this.content.length / 10) + 10;
+      this.timeLeft = this.readTime;
       timer = setInterval(this.countDown, 1000);
     },
     countDown: function() {

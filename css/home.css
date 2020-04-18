@@ -43,6 +43,7 @@ div.button {
   font-size: 1.2rem;
   margin: 10px;
   text-align: center;
+  cursor: pointer;
 }
 
 div.tasklist {
@@ -56,6 +57,7 @@ div.task {
   background-color: #f0f2f5;
   padding: 0 20px;
   box-shadow: 2px 2px 2px #f0f2f5;
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {

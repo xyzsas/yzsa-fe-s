@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" v-cloak>
     <img class="logo" src="./img/yzzx/logo.png">
     <div class="profile card ccol">
       <img src="./img/person.svg">
@@ -25,8 +25,8 @@
     <div class="tasklist card ccol">
       <h1>任务列表</h1>
       <p>{{tip}}</p>
-      <div v-for="task in tasklist" class="task round" :style="taskStyle(task)" @click="doTask(task)">
-        <h3>{{task.title}}</h3>
+      <div v-if="timestamp" v-for="task in tasklist" class="task round" :style="taskStyle(task)" @click="doTask(task)">
+        <h3>{{taskTitle(task)}}</h3>
       </div>
     </div>
   </div>
