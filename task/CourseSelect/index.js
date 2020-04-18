@@ -2,7 +2,7 @@
 
 const colors = {
   blue: '#e6f7ff',
-  grey: 'rgba(0, 0, 0, 0.65)'
+  grey: '#f0f2f5'
 };
 
 const app = new Vue({
@@ -26,7 +26,10 @@ const app = new Vue({
         this.courses = resp.data;
         this.loading = false;
       })
-      .catch(CatchError);
+      .catch(() => {
+        CatchError();
+        Jump("../../home.html");
+      });
   },
   methods: {
     enroll: async function(c) {
